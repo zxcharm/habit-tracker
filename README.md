@@ -4,6 +4,8 @@
 
 [Открыть демо «Путь»](https://zxcharm.pythonanywhere.com/)
 
+[Открыть бота в Telegram](https://t.me/zxcharm_habit_tracker_bot)
+
 ![Экран «Обзор» приложения «Путь» с привычками и недельным графиком](docs/dashboard.jpg)
 
 ## Возможности
