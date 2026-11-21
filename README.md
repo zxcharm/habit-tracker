@@ -1,34 +1,35 @@
 # Путь · Habit Tracker
 
-Fullstack-трекер привычек на **FastAPI, SQLite, React и TypeScript**. При первом открытии запускается демо с четырьмя привычками и историей отметок. В личном аккаунте можно создавать привычки, выбирать дни недели, отмечать выполнение по датам и следить за сериями в календаре и статистике. Все компоненты работают локально.
+«Путь» — fullstack-трекер привычек на **FastAPI, SQLite, React и TypeScript**. В демо сразу доступны четыре привычки с историей отметок. В личном аккаунте можно составить своё расписание и сохранять прогресс между входами.
 
 [Открыть демо «Путь»](https://zxcharm.pythonanywhere.com/)
 
-## Быстрый запуск в этой папке
+![Экран «Обзор» приложения «Путь» с привычками и недельным графиком](docs/dashboard.jpg)
 
-Виртуальное окружение и сборка интерфейса уже подготовлены. Если предыдущая версия Uvicorn ещё работает, останови её через `Ctrl+C` и выполни в PowerShell из папки проекта:
+## Возможности
 
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn main:app --reload
-```
-
-Открой [приложение](http://127.0.0.1:8000/). [Swagger UI](http://127.0.0.1:8000/docs) показывает API, а [GET /health](http://127.0.0.1:8000/health) проверяет, что сервер отвечает. Если проверяешь закрытые маршруты в Swagger, сначала открой демо или войди в приложение на том же адресе. Браузер передаст cookie в запросе.
-
-Учебный `GET /habits` по-прежнему отдаёт три исходных примера. Реальные привычки пользователя доступны через `GET /api/habits`.
+- Привычки с собственными категориями и расписанием по дням недели.
+- Отметки по датам, включая прошедшие дни, и подсчёт серий выполнения.
+- Недельный обзор, календарь активности, статистика за неделю и месяц.
+- Дневные фразы по результатам, личный кабинет и адаптивная тёмная тема.
 
 ## Запуск из чистой копии
 
-Понадобятся Python 3.13 или 3.14 и Node.js 24 или новее. Все команды выполняются из корня проекта:
+Понадобятся Git, Python 3.13 или 3.14 и Node.js 24 или новее. Команды для PowerShell:
 
 ```powershell
+git clone https://github.com/zxcharm/habit-tracker.git
+cd habit-tracker
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 npm.cmd install --prefix frontend
 npm.cmd run build --prefix frontend
 .\.venv\Scripts\python.exe -m uvicorn main:app --reload
 ```
 
-Если Python доступен через `py`, замени первую команду на `py -m venv .venv`. SQLite создаст файл `data/habits.sqlite3` при запуске. Его можно перенести, указав путь в переменной окружения `HABIT_DB_PATH`.
+После запуска открой [приложение](http://127.0.0.1:8000/), [Swagger UI](http://127.0.0.1:8000/docs) или [проверку сервера](http://127.0.0.1:8000/health). Для запросов к закрытым маршрутам через Swagger сначала открой демо или войди в приложение по тому же адресу.
+
+Если Python доступен через `py`, создай окружение командой `py -m venv .venv`. SQLite создаст файл `data/habits.sqlite3` при запуске. Другой путь можно указать в переменной окружения `HABIT_DB_PATH`.
 
 При работе над интерфейсом запусти `npm.cmd run dev --prefix frontend` во втором терминале, оставив FastAPI запущенным. Открой [Vite](http://127.0.0.1:5173/). Он обновляет интерфейс при сохранении исходников и передаёт запросы `/api` в FastAPI.
 
@@ -69,6 +70,7 @@ npm.cmd run build --prefix frontend
 ## Автоматические проверки
 
 ```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 npm.cmd run check --prefix frontend
 npm.cmd run build --prefix frontend
