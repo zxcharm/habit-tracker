@@ -6,6 +6,7 @@ import { Icon } from './Icon';
 import type { IconName } from './Icon';
 import { api, ApiError, dateKey, formatDate, WEEKDAYS } from './data';
 import type { Category, Dashboard, Habit, HabitInput, Profile } from './data';
+import { prepareTelegramLayout } from './telegram';
 import './styles.css';
 
 type View = 'overview' | 'calendar' | 'stats' | 'profile';
@@ -298,4 +299,13 @@ function App() {
 }
 
 const root = document.getElementById('root');
-if (root) createRoot(root).render(<App />);
+if (root) {
+  const readyForTelegram = prepareTelegramLayout();
+
+  function Root() {
+    useEffect(readyForTelegram, []);
+    return <App />;
+  }
+
+  createRoot(root).render(<Root />);
+}

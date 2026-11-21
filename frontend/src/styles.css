@@ -277,6 +277,33 @@ dialog::backdrop { background: #080610b3; backdrop-filter: blur(4px); }
   .panel { padding: 12px; border-radius: 13px; }
   .calendar-panel .panel-heading { flex-wrap: wrap; }
   .toast { bottom: 63px; }
+
+  .telegram-mini-app {
+    --put-visible-height: min(100dvh, var(--tg-viewport-stable-height, 100dvh));
+    --put-bottom-inset: max(5px, env(safe-area-inset-bottom, 0px),
+      var(--tg-safe-area-inset-bottom, 0px), var(--tg-content-safe-area-inset-bottom, 0px));
+  }
+  .telegram-mini-app #root { position: relative; }
+  .telegram-mini-app .shell {
+    display: grid;
+    grid-template: minmax(0, 1fr) auto / minmax(0, 1fr);
+    height: var(--put-visible-height);
+    min-height: 0;
+  }
+  .telegram-mini-app .workspace {
+    grid-row: 1;
+    overflow-y: auto;
+    padding-top: max(18px, var(--tg-safe-area-inset-top, 0px), var(--tg-content-safe-area-inset-top, 0px));
+    padding-bottom: 18px;
+  }
+  .telegram-mini-app .sidebar {
+    grid-row: 2;
+    position: relative;
+    inset: auto;
+    padding-bottom: var(--put-bottom-inset);
+  }
+  .telegram-mini-app .welcome { min-height: var(--put-visible-height); }
+  .telegram-mini-app .toast { position: absolute; bottom: calc(58px + var(--put-bottom-inset)); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
